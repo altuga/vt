@@ -21,6 +21,9 @@ public class One {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException, IOException {
 
+        System.setProperty("java.net.useSystemProxies", "true");
+
+        //System.setProperty("javax.net.ssl.trustStorePassword","qwerty");
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         CompletableFuture<Integer> cf1 = CompletableFuture.supplyAsync(() -> findTagsFromStackoverflow("java"), executorService);
         CompletableFuture<Integer> cf2 = CompletableFuture.supplyAsync(() -> findTagsFromStackoverflow("linux"), executorService);

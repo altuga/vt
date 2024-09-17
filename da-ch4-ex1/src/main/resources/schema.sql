@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS product (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    price DOUBLE NOT NULL,
-    quantity INT NULL
-);

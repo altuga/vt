@@ -16,7 +16,7 @@ public class OneWithoutBlocking {
     private static final String USER_AGENT = "Mozilla/5.0";
 
     public static void main(String[] args) throws ExecutionException, InterruptedException, IOException {
-
+        System.setProperty("java.net.useSystemProxies", "true");
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         CompletableFuture<Integer> cf1 = CompletableFuture.supplyAsync(() -> process("java"), executorService)
                 .thenApply(result -> {
@@ -37,12 +37,9 @@ public class OneWithoutBlocking {
     }
 
     public static int process(String value) {
-        try {
-            Thread.sleep(1000); // I/O operation
-            System.out.println("Thread " +  value + " -> "+Thread.currentThread().getName());
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        findTagsFromStackoverflow(value);
+        //Thread.sleep(1000); // I/O operation
+        System.out.println("Thread " +  value + " -> "+Thread.currentThread().getName());
         return value.length();
     }
 
